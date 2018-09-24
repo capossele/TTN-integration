@@ -1,7 +1,5 @@
 var express = require('express');
 var app = express();
-const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
-app.use(awsServerlessExpressMiddleware.eventContext())
 
 app.get('/', function(req, res) {
   res.send({
@@ -10,11 +8,10 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-  //res.send({
-    res.send(req.apiGateway.event)
-    //"Body": req.body,
+  res.send({
+    "Body": req.body
     //"Headers": req.headers
-  //});
+  });
 });
 
 
