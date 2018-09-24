@@ -1,8 +1,6 @@
 var express = require('express');
 var app = express();
 
-app.use(express.json());
-
 app.get('/', function(req, res) {
   res.send({
     "Output": "Hello World!"
@@ -11,8 +9,9 @@ app.get('/', function(req, res) {
 
 app.post('/', function(req, res) {
   res.send({
-    "Body": req.body,
-    "Headers": req.headers
+    "Total": req
+    //"Body": req.body,
+    //"Headers": req.headers
   });
 });
 
