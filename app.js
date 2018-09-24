@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 
+app.use(multer());
+
 app.get('/', function(req, res) {
   res.send({
     "Output": "Hello World!"
