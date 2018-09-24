@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
 
 app.post('/', function(req, res) {
   //res.send({
-    res.json(req.apiGateway.event)
+    res.send(req.apiGateway.event)
     //"Body": req.body,
     //"Headers": req.headers
   //});
