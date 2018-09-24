@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
+const bodyParser = require('body-parser');
 
-app.use(multer());
+app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
   res.send({
