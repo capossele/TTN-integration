@@ -78,8 +78,8 @@ app.post('/ttn', function(req, res) {
   var test;
   fetch(orionUrl, orionParam)
   .then(data=>{
-    test = data.json()
-    return data.json()
+    test = data.json();
+    return test;
   })
   .then(r=>{
     console.log(r);
