@@ -9,8 +9,8 @@ app.get('/', function(req, res) {
 
 app.post('/', function(req, res) {
   res.send({
-    "Body": req.body
-    //"Headers": req.headers
+    "Body": req.body,
+    "Headers": req.headers
   });
 });
 
