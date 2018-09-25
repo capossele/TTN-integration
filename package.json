@@ -6,7 +6,8 @@
     "dependencies": {
         "express": "4.16.2",
         "aws-serverless-express": "3.1.3",
-        "body-parser": "^1.17.1"
+        "body-parser": "^1.17.1",
+        "atob": "^2.1.2"
     },
     "devDependencies": {
         "mocha": "5.0.0",
