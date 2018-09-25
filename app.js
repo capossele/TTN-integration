@@ -2,10 +2,11 @@ var express = require('express');
 var app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
-const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
+//const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
 const router = express.Router();
 
-app.use(awsServerlessExpressMiddleware.eventContext())
+//app.use(awsServerlessExpressMiddleware.eventContext())
+router.use(bodyParser.json())
 
 router.get('/', function(req, res) {
   res.send({
@@ -14,11 +15,10 @@ router.get('/', function(req, res) {
 });
 
 router.post('/testPost', function(req, res) {
-  res.status(201).json(req.apiGateway.event);
-  //   {
-  //   "Body": req.body,
-  //   "Headers": req.headers
-  // });
+  res.status(201).json({
+    "Body": req.body,
+    "Headers": req.headers
+  });
 });
 
 app.use('/', router)
