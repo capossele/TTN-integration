@@ -77,14 +77,19 @@ app.post('/ttn', function(req, res) {
   };
   var test;
   fetch(orionUrl, orionParam)
-  .then(data=>{
-    test = data.json();
-    return test;
+  .then(function(response) {
+    test = response.status;
+    console.log(response.status);
   })
-  .then(r=>{
-    console.log(r);
-  })
-  .then(res.status(201).json(test))
+  // .then(data=>{
+  //   test = data.json();
+  //   return test;
+  // })
+  // .then(r=>{
+  //   console.log(r);
+  // })
+  .then(res.status(201).send(test))
+  .catch(error=>console.log(error))
 
   //res.status(201).json(msg);
 });
