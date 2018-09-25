@@ -82,33 +82,57 @@ app.post('/ttn', function(req, res) {
 
   var test;
  
-  //Marketplace POST
-  axios({
-    method: 'POST', 
-    url: marketplaceUrl, 
-    headers: marketplace.headers,
-    data: marketplace.payload 
-  })
-  .then(function (response) {
-    console.log(response);
-    //Orion POST
+  axios.all([
+    axios({
+      method: 'POST', 
+      url: marketplaceUrl, 
+      headers: marketplace.headers,
+      data: marketplace.payload 
+    }),
     axios({
       method: 'POST', 
       url: orionUrl, 
       headers: msg.headers,
       data: msg.payload 
     })
-    .then(function (response) {
-      console.log(response);
-      res.status(response.status).json(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  })
+  ])
+  .then(axios.spread((marketplaceRes, orionRes) => {
+    // do something with both responses
+    console.log(marketplaceRes);
+    console.log(orionRes);
+    res.status(orionRes.status).json(orionRes.data);
+  }))
   .catch(function (error) {
     console.log(error);
   });
+
+  // //Marketplace POST
+  // axios({
+  //   method: 'POST', 
+  //   url: marketplaceUrl, 
+  //   headers: marketplace.headers,
+  //   data: marketplace.payload 
+  // })
+  // .then(function (response) {
+  //   console.log(response);
+  //   //Orion POST
+  //   axios({
+  //     method: 'POST', 
+  //     url: orionUrl, 
+  //     headers: msg.headers,
+  //     data: msg.payload 
+  //   })
+  //   .then(function (response) {
+  //     console.log(response);
+  //     res.status(response.status).json(response.data);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
   
 });
 
