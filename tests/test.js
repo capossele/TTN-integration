@@ -14,11 +14,11 @@ describe('Tests app', function() {
         done(err);
     });
   });
-  it('verifies post', function(done) {
-    request.post('/ttn').expect(201).end(function(err, result) {
-        //test.string(result.body.Body).contains('test');
-        //test.value(result).hasHeader('content-type', 'application/json; charset=utf-8');
-        done(err);
-    });
-  });
+  // it('verifies post', function(done) {
+  //   request.post('/ttn').expect(201).end(function(err, result) {
+  //       //test.string(result.body.Body).contains('test');
+  //       //test.value(result).hasHeader('content-type', 'application/json; charset=utf-8');
+  //       done(err);
+  //   });
+  // });
 });
