@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 const bodyParser = require('body-parser');
 const atob = require("atob");
+var fetch = require("node-fetch");
 
 const orionUrl = "http://35.229.108.169:1026/v2/op/update"
 
