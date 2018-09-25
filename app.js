@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 const bodyParser = require('body-parser');
 const atob = require("atob");
-var fetch = require("node-fetch");
+var axios = require("axios");
 
 const orionUrl = "http://35.229.108.169:1026/v2/op/update"
 
@@ -70,17 +70,27 @@ app.post('/ttn', function(req, res) {
 
   console.log(msg);
 
-  const orionParam = {
-    headers: msg.headers,
-    body: msg.payload,
-    method: "POST"
-  };
   var test;
-  fetch(orionUrl, orionParam)
-  .then(function(response) {
-    test = response.status;
-    console.log(response.status);
+ 
+  axios({
+    method: 'POST', 
+    url: orion.orionUrl, 
+    headers: orion.mgs.headers,
+    data: orion.msg.payload 
   })
+  .then(function (response) {
+    console.log(response);
+    res.status(201).send(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
+  // fetch(orionUrl, orionParam)
+  // .then(function(response) {
+  //   test = response.status;
+  //   console.log(response.status);
+  // })
   // .then(data=>{
   //   test = data.json();
   //   return test;
@@ -88,9 +98,6 @@ app.post('/ttn', function(req, res) {
   // .then(r=>{
   //   console.log(r);
   // })
-  .then(res.status(201).send(test))
-  .catch(error=>console.log(error))
-
   //res.status(201).json(msg);
 });
 
@@ -101,6 +108,22 @@ function b64DecodeUnicode(str) {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
 }
+
+const updateOrion = async orion => {
+  try {
+    const response = await axios({
+      method: 'POST', 
+      url: orion.orionUrl, 
+      headers: orion.mgs.headers,
+      data: orion.msg.payload 
+    });
+    const data = response.data;
+    console.log(data);
+    return data
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app
