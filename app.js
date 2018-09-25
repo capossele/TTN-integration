@@ -23,7 +23,7 @@ app.post('/ttn', function(req, res) {
   var marketplace = {}
   marketplace.headers = {
     "Content-Type" : "application/json",
-    "Authorization" : "Bearer " + req.authorization
+    "Authorization" : "Bearer " + req.Authorization
   }
   marketplace.payload = {
     "dataSourceID" : req.body.dev_id,
