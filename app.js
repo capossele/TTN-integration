@@ -80,7 +80,7 @@ app.post('/ttn', function(req, res) {
   })
   .then(function (response) {
     console.log(response);
-    res.status(201).send(response);
+    res.status(response.status).json(response.body);
   })
   .catch(function (error) {
     console.log(error);
