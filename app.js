@@ -5,6 +5,7 @@ const atob = require("atob");
 var axios = require("axios");
 
 const orionUrl = "http://35.229.108.169:1026/v2/op/update"
+const marketplaceUrl = "https://iot-data-marketplace.com/charging/api/assetManagement/assets/createProduct"
 
 app.use(bodyParser.json())
 
@@ -19,7 +20,16 @@ app.post('/ttn', function(req, res) {
   //   "Body": req.body,
   //   "Headers": req.headers
   // })
-  
+  var marketplace = {}
+  marketplace.headers = {
+    "Content-Type" : "application/json",
+    "Authorization" : "Bearer " + req.authorization
+  }
+  marketplace.payload = {
+    "dataSourceID" : req.body.dev_id,
+    "fiwareService" : req.body.app_id
+  }
+
   var msg = {}
   msg.headers = {}
   msg.headers['Content-Type'] = 'application/json';
@@ -72,33 +82,34 @@ app.post('/ttn', function(req, res) {
 
   var test;
  
+  //Marketplace POST
   axios({
     method: 'POST', 
-    url: orionUrl, 
-    headers: msg.headers,
-    data: msg.payload 
+    url: marketplaceUrl, 
+    headers: marketplace.headers,
+    data: marketplace.payload 
   })
   .then(function (response) {
     console.log(response);
-    res.status(response.status).json(response.data);
+    //Orion POST
+    axios({
+      method: 'POST', 
+      url: orionUrl, 
+      headers: msg.headers,
+      data: msg.payload 
+    })
+    .then(function (response) {
+      console.log(response);
+      res.status(response.status).json(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   })
   .catch(function (error) {
     console.log(error);
   });
   
-  // fetch(orionUrl, orionParam)
-  // .then(function(response) {
-  //   test = response.status;
-  //   console.log(response.status);
-  // })
-  // .then(data=>{
-  //   test = data.json();
-  //   return test;
-  // })
-  // .then(r=>{
-  //   console.log(r);
-  // })
-  //res.status(201).json(msg);
 });
 
 
@@ -108,22 +119,6 @@ function b64DecodeUnicode(str) {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
 }
-
-// const updateOrion = async orion => {
-//   try {
-//     const response = await axios({
-//       method: 'POST', 
-//       url: orion.orionUrl, 
-//       headers: orion.mgs.headers,
-//       data: orion.msg.payload 
-//     });
-//     const data = response.data;
-//     console.log(data);
-//     return data
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app
