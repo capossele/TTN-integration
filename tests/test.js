@@ -36,7 +36,7 @@ describe('Tests app', function() {
           },
         "downlink_url": "https://integrations.thethingsnetwork.org/ttn-eu/api/v2/down/everydayiot/marketplace?key=ttn-account-v2.RpbgPHgq3lH82QJGC_2g1WEnX2ossRDVmH-WgPMfA-Q" 
     }
-    request.post('/ttn').send(payload).expect(204).end(function(err, result) {
+    request.post('/ttn').set('Authorization', 'XYZ').send(payload).expect(204).end(function(err, result) {
         //test.string(result.body.Body).contains('test');
         //test.value(result).hasHeader('content-type', 'application/json; charset=utf-8');
         done(err);
