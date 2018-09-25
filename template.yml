@@ -39,5 +39,5 @@ Resources:
         PostEvent:
           Type: Api
           Properties:
-            Path: /
+            Path: /testPost
             Method: post
