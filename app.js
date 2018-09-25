@@ -10,7 +10,11 @@ app.get('/', function(req, res) {
   });
 });
 
-app.post('/testPost', function(req, res) {
+app.post('/ttn', function(req, res) {
+  console.log({
+    "Body": req.body,
+    "Headers": req.headers
+  })
   res.status(201).json({
     "Body": req.body,
     "Headers": req.headers

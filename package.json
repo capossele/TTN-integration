@@ -1,6 +1,6 @@
 {
-    "name": "express-HelloWorld",
-    "description": "Hello World ExpressJS WebService",
+    "name": "ttn-integration",
+    "description": "TTN integration with IoT Data Marketplace",
     "version": "0.0.1",
     "private": true,
     "dependencies": {
