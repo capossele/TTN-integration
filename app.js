@@ -3,6 +3,8 @@ var app = express();
 const bodyParser = require('body-parser');
 const atob = require("atob");
 
+const orionUrl = "http://35.229.108.169:1026/v2/op/update"
+
 app.use(bodyParser.json())
 
 app.get('/', function(req, res) {
@@ -51,7 +53,7 @@ app.post('/ttn', function(req, res) {
       "value": parseFloat(temperature[temperature.length-1]),
       "metadata":{
           "unitCode":{
-              "value":"dba",
+              "value":"C",
               "type":"Text"
           }
       }
@@ -67,7 +69,16 @@ app.post('/ttn', function(req, res) {
 
   console.log(msg);
 
-  res.status(201).json(msg);
+  const orionParam = {
+    headers: msg.headers,
+    body: msg.payload,
+    method: "POST"
+  };
+
+  fetch(orionUrl, orionParam)
+  .then(data=>{res.status(201).json(data.json())})
+
+  //res.status(201).json(msg);
 });
 
 
