@@ -74,9 +74,9 @@ app.post('/ttn', function(req, res) {
  
   axios({
     method: 'POST', 
-    url: orion.orionUrl, 
-    headers: orion.mgs.headers,
-    data: orion.msg.payload 
+    url: orionUrl, 
+    headers: mgs.headers,
+    data: msg.payload 
   })
   .then(function (response) {
     console.log(response);
