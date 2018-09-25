@@ -75,9 +75,16 @@ app.post('/ttn', function(req, res) {
     body: msg.payload,
     method: "POST"
   };
-
+  var test;
   fetch(orionUrl, orionParam)
-  .then(data=>{res.status(201).json(data.json())})
+  .then(data=>{
+    test = data.json()
+    return data.json()
+  })
+  .then(r=>{
+    console.log(r);
+  })
+  .then(res.status(201).json(test))
 
   //res.status(201).json(msg);
 });
