@@ -109,21 +109,21 @@ function b64DecodeUnicode(str) {
   }).join(''));
 }
 
-const updateOrion = async orion => {
-  try {
-    const response = await axios({
-      method: 'POST', 
-      url: orion.orionUrl, 
-      headers: orion.mgs.headers,
-      data: orion.msg.payload 
-    });
-    const data = response.data;
-    console.log(data);
-    return data
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const updateOrion = async orion => {
+//   try {
+//     const response = await axios({
+//       method: 'POST', 
+//       url: orion.orionUrl, 
+//       headers: orion.mgs.headers,
+//       data: orion.msg.payload 
+//     });
+//     const data = response.data;
+//     console.log(data);
+//     return data
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app
