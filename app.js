@@ -17,6 +17,7 @@ app.post('/ttn', function(req, res) {
   // })
   
   var msg = {}
+  msg.headers = {}
   msg.headers['Content-Type'] = 'application/json';
   msg.headers['Fiware-Service'] = req.body.app_id;
   var entities = []
