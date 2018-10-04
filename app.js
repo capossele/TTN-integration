@@ -27,13 +27,13 @@ app.post('/ttn', function(req, res) {
   }
   marketplace.payload = {
     "dataSourceID" : req.body.dev_id,
-    "fiwareService" : req.body.app_id
+    "fiwareService" : req.body.app_id.replace("-","_")
   }
 
   var msg = {}
   msg.headers = {}
   msg.headers['Content-Type'] = 'application/json';
-  msg.headers['Fiware-Service'] = req.body.app_id;
+  msg.headers['Fiware-Service'] = req.body.app_id.replace("-","_");
   var entities = []
   entities[0] = {
       "type" : "ttn-device",
