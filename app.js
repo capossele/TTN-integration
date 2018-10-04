@@ -30,6 +30,7 @@ app.post('/ttn', function(req, res) {
     "fiwareService" : req.body.app_id.replace("-","_")
   }
 
+  
   var msg = {}
   msg.headers = {}
   msg.headers['Content-Type'] = 'application/json';
